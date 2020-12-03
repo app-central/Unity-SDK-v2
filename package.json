@@ -1,0 +1,12 @@
+{
+  "name": "com.appcentral.unitysdk",
+  "displayName": "AppCentral Unity SDK",
+  "version": "0.1.3",
+  "unity": "2018.3",
+  "keywords": [
+    "sdk",
+    "purchasing"
+  ],
+  "type": "tool",
+  "description": "AppCentral Unity SDK"
+}

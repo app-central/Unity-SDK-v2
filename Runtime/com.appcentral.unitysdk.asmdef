@@ -1,0 +1,16 @@
+{
+    "name": "com.appcentral.unitysdk",
+    "rootNamespace": "AppCentral",
+    "references": [
+        "UnityEngine.Purchasing"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
