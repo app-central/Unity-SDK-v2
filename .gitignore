@@ -58,3 +58,8 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+/bin/Debug.meta
+/bin.meta
+/obj.meta
+/Unity-SDK-v2.csproj.meta
+/Unity-SDK-v2.sln.meta

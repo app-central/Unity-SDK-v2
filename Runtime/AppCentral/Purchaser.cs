@@ -117,6 +117,7 @@ namespace AppCentral
                 Debug.Log("RestorePurchases started ...");
 
                 // Fetch the Apple store-specific subsystem.
+                
                 IAppleExtensions apple = Purchaser.storeExtensionProvider.GetExtension<IAppleExtensions>();
 
                 // Begin the asynchronous process of restoring purchases. Expect a confirmation response in

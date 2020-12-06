@@ -8,5 +8,8 @@
     "purchasing"
   ],
   "type": "tool",
-  "description": "AppCentral Unity SDK"
+  "description": "AppCentral Unity SDK",
+  "dependencies": {
+    "com.unity.purchasing": "2.2.1"
+  }
 }
