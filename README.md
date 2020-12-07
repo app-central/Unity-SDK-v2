@@ -8,7 +8,7 @@ Refurbishing the Unity SDK as a UPM package
 - "Install Latest Version"
 - "Import"
 - An installer should pop out. Confirm everything.
-- Open Package Manager
+- Open Package Manager (Menu > Window > Package Manager)
 - Click the + button
 - "Add Package from Git URL"
 - Enter the Git URL from the AppCentral SDK repository
