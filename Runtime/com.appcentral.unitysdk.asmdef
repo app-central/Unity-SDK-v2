@@ -2,7 +2,8 @@
     "name": "com.appcentral.unitysdk",
     "rootNamespace": "AppCentral",
     "references": [
-        "UnityEngine.Purchasing"
+        "UnityEngine.Purchasing",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
