@@ -57,12 +57,7 @@ namespace AppCentral
                 return;
             }
 
-            // Instance.bottomTitleTMP.text = AppCentralStoreListener.LocalizedTitle;
-            // Instance.bottomSubtitleTMP.text = AppCentralStoreListener.LocalizedDescription + " just " +
-                                              // AppCentralStoreListener.LocalizedPriceString + "/month";
-            // Instance.topLeftLinkTMP.text = "Terms";
-            // Instance.topRightLinkTMP.text = "Restore";
-            // Instance.subscriptionButtonTMP.text = "Subscribe";
+            SubscriptionWindow.Instance.gameObject.SetActive(true);
 
             SubscriptionWindow.WindowOpen = true;
         }
@@ -72,7 +67,7 @@ namespace AppCentral
         {
             SubscriptionWindow.WindowOpen = false;
 
-            throw new NotImplementedException();
+            SubscriptionWindow.Instance.gameObject.SetActive(false);
         }
 
         private void CheckAssignments()
