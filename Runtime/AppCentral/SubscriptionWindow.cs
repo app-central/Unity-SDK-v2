@@ -25,6 +25,7 @@ namespace AppCentral
         [SerializeField] private TextMeshProUGUI bottomSubtitleTMP;
         [SerializeField] private Image subscriptionButtonImage;
         [SerializeField] private TextMeshProUGUI subscriptionButtonTMP;
+        [ContextMenuItem("Run Configuration", "ReadConfiguration")]
         [SerializeField] private SubscriptionWindowConfiguration subscriptionConfiguration;
         #endregion // inspector fields
 
@@ -32,7 +33,7 @@ namespace AppCentral
         public static SubscriptionWindow Instance { get; private set; }
         public static bool WindowOpen { get; private set; }
 
-        private void OpenAppCentralTerms()
+        public void OpenAppCentralTerms()
         {
             // TODO: Should be a const field or from a configuration file
             Application.OpenURL("https://www.app-central.com/terms");
@@ -94,12 +95,12 @@ namespace AppCentral
             { this.topLeftLinkTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
                                         .First(tmp => tmp.gameObject.name.ToLower().Contains("top")
                                                                         && tmp.gameObject.name.ToLower().Contains("left")
-                                                                        && tmp.gameObject.name.ToLower().Contains("link")); }
+                                                                        && tmp.gameObject.name.ToLower().Contains("button")); }
             if (this.topRightLinkTMP == null)
             { this.topRightLinkTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
                                          .First(tmp => tmp.gameObject.name.ToLower().Contains("top")
                                                                         && tmp.gameObject.name.ToLower().Contains("right")
-                                                                        && tmp.gameObject.name.ToLower().Contains("link")); }
+                                                                        && tmp.gameObject.name.ToLower().Contains("button")); }
             if (this.bottomTitleTMP == null)
             { this.bottomTitleTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
                                           .First(tmp => tmp.gameObject.name.ToLower().Contains("bottom")
@@ -114,7 +115,7 @@ namespace AppCentral
                                                                     && image.gameObject.name.ToLower().Contains("button")); }
             if (this.subscriptionButtonTMP == null)
             { this.subscriptionButtonTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
-                                               .First(tmp => tmp.gameObject.name.ToLower().Contains("subscription")
+                                               .First(tmp => tmp.gameObject.name.ToLower().Contains("subscribe")
                                                                             && tmp.gameObject.name.ToLower().Contains("tmp")); }
         }
 
@@ -127,6 +128,10 @@ namespace AppCentral
             this.foregroundImage.color = foregroundImageColor;
             this.subscriptionButtonImage.sprite = this.subscriptionConfiguration.subscriptionButtonImage;
 
+            this.topTitleTMP.alignment = this.topSubtitleTMP.alignment = this.subscriptionButtonTMP.alignment
+                = this.bottomTitleTMP.alignment = this.bottomSubtitleTMP.alignment = TextAlignmentOptions.Center;
+            this.topLeftLinkTMP.alignment = TextAlignmentOptions.MidlineRight;
+            this.topRightLinkTMP.alignment = TextAlignmentOptions.MidlineLeft;
             this.topTitleTMP.text = this.subscriptionConfiguration.topTitleText;
             this.topSubtitleTMP.text = this.subscriptionConfiguration.topSubtitleText;
             this.topLeftLinkTMP.text = this.subscriptionConfiguration.topLeftLinkText;
@@ -139,8 +144,6 @@ namespace AppCentral
         private void OnValidate()
         {
             this.CheckAssignments();
-
-            this.ReadConfiguration();
         }
 
         private void Awake()
