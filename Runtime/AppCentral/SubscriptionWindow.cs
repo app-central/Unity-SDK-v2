@@ -3,6 +3,7 @@ namespace AppCentral
 {
     #region using
     using System;
+    using System.Linq;
     using UnityEngine;
     using Object = UnityEngine.Object;
     using UnityEngine.UI;
@@ -24,7 +25,9 @@ namespace AppCentral
         [SerializeField] private TextMeshProUGUI bottomSubtitleTMP;
         [SerializeField] private Image subscriptionButtonImage;
         [SerializeField] private TextMeshProUGUI subscriptionButtonTMP;
+        [SerializeField] private SubscriptionWindowConfiguration subscriptionConfiguration;
         #endregion // inspector fields
+
         // It must be unique, always available and always accessible. It's the interface's presence in the game.
         public static SubscriptionWindow Instance { get; private set; }
         public static bool WindowOpen { get; private set; }
@@ -66,14 +69,85 @@ namespace AppCentral
         /// <summary>TODO: Hide this panel in some way.</summary>
         private static void HidePanel()
         {
+            SubscriptionWindow.WindowOpen = false;
+
             throw new NotImplementedException();
+        }
+
+        private void CheckAssignments()
+        {
+            if (this.backgroundImage == null)
+            { this.backgroundImage = this.GetComponentsInChildren<Image>()
+                                         .First(image => image.gameObject.name.ToLower().Contains("background")); }
+            if (this.foregroundImage == null)
+            { this.foregroundImage = this.GetComponentsInChildren<Image>()
+                                         .First(image => image.gameObject.name.ToLower().Contains("foreground")); }
+            if (this.topTitleTMP == null)
+            { this.topTitleTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
+                                     .First(tmp => tmp.gameObject.name.ToLower().Contains("top")
+                                                                    && tmp.gameObject.name.ToLower().Contains("title")); }
+            if (this.topSubtitleTMP == null)
+            { this.topSubtitleTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
+                                        .First(tmp => tmp.gameObject.name.ToLower().Contains("top")
+                                                                     && tmp.gameObject.name.ToLower().Contains("subtitle")); }
+            if (this.topLeftLinkTMP == null)
+            { this.topLeftLinkTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
+                                        .First(tmp => tmp.gameObject.name.ToLower().Contains("top")
+                                                                        && tmp.gameObject.name.ToLower().Contains("left")
+                                                                        && tmp.gameObject.name.ToLower().Contains("link")); }
+            if (this.topRightLinkTMP == null)
+            { this.topRightLinkTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
+                                         .First(tmp => tmp.gameObject.name.ToLower().Contains("top")
+                                                                        && tmp.gameObject.name.ToLower().Contains("right")
+                                                                        && tmp.gameObject.name.ToLower().Contains("link")); }
+            if (this.bottomTitleTMP == null)
+            { this.bottomTitleTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
+                                          .First(tmp => tmp.gameObject.name.ToLower().Contains("bottom")
+                                                                        && tmp.gameObject.name.ToLower().Contains("title")); }
+            if (this.bottomSubtitleTMP == null)
+            { this.bottomSubtitleTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
+                                           .First(tmp => tmp.gameObject.name.ToLower().Contains("bottom")
+                                                                        && tmp.gameObject.name.ToLower().Contains("subtitle")); }
+            if (this.subscriptionButtonImage == null)
+            { this.subscriptionButtonImage = this.GetComponentsInChildren<Image>()
+                                                 .First(image => image.gameObject.name.ToLower().Contains("subscription")
+                                                                    && image.gameObject.name.ToLower().Contains("button")); }
+            if (this.subscriptionButtonTMP == null)
+            { this.subscriptionButtonTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
+                                               .First(tmp => tmp.gameObject.name.ToLower().Contains("subscription")
+                                                                            && tmp.gameObject.name.ToLower().Contains("tmp")); }
+        }
+
+        private void ReadConfiguration()
+        {
+            this.backgroundImage.sprite = this.subscriptionConfiguration.backgroundImage;
+            this.foregroundImage.sprite = this.subscriptionConfiguration.foregroundImage;
+            Color foregroundImageColor = this.foregroundImage.color;
+            foregroundImageColor.a = this.subscriptionConfiguration.foregroundOpacity;
+            this.foregroundImage.color = foregroundImageColor;
+            this.subscriptionButtonImage.sprite = this.subscriptionConfiguration.subscriptionButtonImage;
+
+            this.topTitleTMP.text = this.subscriptionConfiguration.topTitleText;
+            this.topSubtitleTMP.text = this.subscriptionConfiguration.topSubtitleText;
+            this.topLeftLinkTMP.text = this.subscriptionConfiguration.topLeftLinkText;
+            this.topRightLinkTMP.text = this.subscriptionConfiguration.topRightLinkText;
+            this.bottomTitleTMP.text = this.subscriptionConfiguration.bottomTitleText;
+            this.bottomSubtitleTMP.text = this.subscriptionConfiguration.bottomSubtitleText;
+            this.subscriptionButtonTMP.text = this.subscriptionConfiguration.subscriptionButtonText;
+        }
+
+        private void OnValidate()
+        {
+            this.CheckAssignments();
+
+            this.ReadConfiguration();
         }
 
         private void Awake()
         {
             if (SubscriptionWindow.Instance != null && SubscriptionWindow.Instance != this)
             {
-                Object.Destroy(this.gameObject);
+                Object.DestroyImmediate(this.gameObject);
                 return;
             }
 
