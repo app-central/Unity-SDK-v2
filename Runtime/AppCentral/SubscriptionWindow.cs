@@ -8,6 +8,7 @@ namespace AppCentral
     using Object = UnityEngine.Object;
     using UnityEngine.UI;
     using TMPro;
+    using UnityEngine.Serialization;
     #endregion
 
     /// <summary>This is the graphical interface, the view, of the shop.
@@ -19,8 +20,8 @@ namespace AppCentral
         [SerializeField] private Image foregroundImage;
         [SerializeField] private TextMeshProUGUI topTitleTMP;
         [SerializeField] private TextMeshProUGUI topSubtitleTMP;
-        [SerializeField] private TextMeshProUGUI topLeftLinkTMP;
-        [SerializeField] private TextMeshProUGUI topRightLinkTMP;
+        [SerializeField] private TextMeshProUGUI termsLinkTMP;
+        [SerializeField] private TextMeshProUGUI restoreLinkTMP;
         [SerializeField] private TextMeshProUGUI bottomTitleTMP;
         [SerializeField] private TextMeshProUGUI bottomSubtitleTMP;
         [SerializeField] private Image subscriptionButtonImage;
@@ -62,8 +63,7 @@ namespace AppCentral
             SubscriptionWindow.WindowOpen = true;
         }
 
-        /// <summary>TODO: Hide this panel in some way.</summary>
-        private static void HidePanel()
+        public static void HidePanel()
         {
             SubscriptionWindow.WindowOpen = false;
 
@@ -74,66 +74,88 @@ namespace AppCentral
         {
             if (this.backgroundImage == null)
             { this.backgroundImage = this.GetComponentsInChildren<Image>()
-                                         .First(image => image.gameObject.name.ToLower().Contains("background")); }
+                                         .FirstOrDefault(image => image.gameObject.name.ToLower().Contains("background")); }
             if (this.foregroundImage == null)
             { this.foregroundImage = this.GetComponentsInChildren<Image>()
-                                         .First(image => image.gameObject.name.ToLower().Contains("foreground")); }
+                                         .FirstOrDefault(image => image.gameObject.name.ToLower().Contains("foreground")); }
             if (this.topTitleTMP == null)
             { this.topTitleTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
-                                     .First(tmp => tmp.gameObject.name.ToLower().Contains("top")
-                                                                    && tmp.gameObject.name.ToLower().Contains("title")); }
+                                     .FirstOrDefault(tmp => tmp.gameObject.name.ToLower().Contains("top")
+                                                            && tmp.gameObject.name.ToLower().Contains("title")); }
             if (this.topSubtitleTMP == null)
             { this.topSubtitleTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
-                                        .First(tmp => tmp.gameObject.name.ToLower().Contains("top")
-                                                                     && tmp.gameObject.name.ToLower().Contains("subtitle")); }
-            if (this.topLeftLinkTMP == null)
-            { this.topLeftLinkTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
-                                        .First(tmp => tmp.gameObject.name.ToLower().Contains("top")
-                                                                        && tmp.gameObject.name.ToLower().Contains("left")
-                                                                        && tmp.gameObject.name.ToLower().Contains("button")); }
-            if (this.topRightLinkTMP == null)
-            { this.topRightLinkTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
-                                         .First(tmp => tmp.gameObject.name.ToLower().Contains("top")
-                                                                        && tmp.gameObject.name.ToLower().Contains("right")
-                                                                        && tmp.gameObject.name.ToLower().Contains("button")); }
+                                        .FirstOrDefault(tmp => tmp.gameObject.name.ToLower().Contains("top")
+                                                               && tmp.gameObject.name.ToLower().Contains("subtitle")); }
+            if (this.termsLinkTMP == null)
+            { this.termsLinkTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
+                                        .FirstOrDefault(tmp => tmp.gameObject.name.ToLower().Contains("terms")
+                                                               && tmp.gameObject.name.ToLower().Contains("button")); }
+            if (this.restoreLinkTMP == null)
+            { this.restoreLinkTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
+                                         .FirstOrDefault(tmp => tmp.gameObject.name.ToLower().Contains("restore")
+                                                                && tmp.gameObject.name.ToLower().Contains("button")); }
             if (this.bottomTitleTMP == null)
             { this.bottomTitleTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
-                                          .First(tmp => tmp.gameObject.name.ToLower().Contains("bottom")
-                                                                        && tmp.gameObject.name.ToLower().Contains("title")); }
+                                          .FirstOrDefault(tmp => tmp.gameObject.name.ToLower().Contains("bottom")
+                                                                 && tmp.gameObject.name.ToLower().Contains("title")); }
             if (this.bottomSubtitleTMP == null)
             { this.bottomSubtitleTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
-                                           .First(tmp => tmp.gameObject.name.ToLower().Contains("bottom")
-                                                                        && tmp.gameObject.name.ToLower().Contains("subtitle")); }
+                                           .FirstOrDefault(tmp => tmp.gameObject.name.ToLower().Contains("bottom")
+                                                                  && tmp.gameObject.name.ToLower().Contains("subtitle")); }
             if (this.subscriptionButtonImage == null)
             { this.subscriptionButtonImage = this.GetComponentsInChildren<Image>()
-                                                 .First(image => image.gameObject.name.ToLower().Contains("subscription")
-                                                                    && image.gameObject.name.ToLower().Contains("button")); }
+                                                 .FirstOrDefault(image => image.gameObject.name.ToLower().Contains("subscription")
+                                                                          && image.gameObject.name.ToLower().Contains("button")); }
             if (this.subscriptionButtonTMP == null)
             { this.subscriptionButtonTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
-                                               .First(tmp => tmp.gameObject.name.ToLower().Contains("subscribe")
-                                                                            && tmp.gameObject.name.ToLower().Contains("tmp")); }
+                                               .FirstOrDefault(tmp => tmp.gameObject.name.ToLower().Contains("subscribe")
+                                                                      && tmp.gameObject.name.ToLower().Contains("tmp")); }
         }
 
+        /// <summary>Read configuration file into window parameters. Called by field context menu.</summary>
         private void ReadConfiguration()
         {
-            this.backgroundImage.sprite = this.subscriptionConfiguration.backgroundImage;
-            this.foregroundImage.sprite = this.subscriptionConfiguration.foregroundImage;
-            Color foregroundImageColor = this.foregroundImage.color;
-            foregroundImageColor.a = this.subscriptionConfiguration.foregroundOpacity;
-            this.foregroundImage.color = foregroundImageColor;
-            this.subscriptionButtonImage.sprite = this.subscriptionConfiguration.subscriptionButtonImage;
-
-            this.topTitleTMP.alignment = this.topSubtitleTMP.alignment = this.subscriptionButtonTMP.alignment
-                = this.bottomTitleTMP.alignment = this.bottomSubtitleTMP.alignment = TextAlignmentOptions.Center;
-            this.topLeftLinkTMP.alignment = TextAlignmentOptions.MidlineRight;
-            this.topRightLinkTMP.alignment = TextAlignmentOptions.MidlineLeft;
-            this.topTitleTMP.text = this.subscriptionConfiguration.topTitleText;
-            this.topSubtitleTMP.text = this.subscriptionConfiguration.topSubtitleText;
-            this.topLeftLinkTMP.text = this.subscriptionConfiguration.topLeftLinkText;
-            this.topRightLinkTMP.text = this.subscriptionConfiguration.topRightLinkText;
-            this.bottomTitleTMP.text = this.subscriptionConfiguration.bottomTitleText;
-            this.bottomSubtitleTMP.text = this.subscriptionConfiguration.bottomSubtitleText;
-            this.subscriptionButtonTMP.text = this.subscriptionConfiguration.subscriptionButtonText;
+            if (this.backgroundImage != null)
+            { this.backgroundImage.sprite = this.subscriptionConfiguration.backgroundImage; }
+            if (this.foregroundImage != null)
+            { this.foregroundImage.sprite = this.subscriptionConfiguration.foregroundImage; }
+            if (this.foregroundImage != null)
+            {
+                Color foregroundImageColor = this.foregroundImage.color;
+                foregroundImageColor.a = this.subscriptionConfiguration.foregroundOpacity;
+                this.foregroundImage.color = foregroundImageColor;
+            }
+            if (this.subscriptionButtonImage != null)
+            { this.subscriptionButtonImage.sprite = this.subscriptionConfiguration.subscriptionButtonImage; }
+            
+            if (this.topTitleTMP != null)
+            {this.topTitleTMP.alignment = TextAlignmentOptions.Center;}
+            if (this.topSubtitleTMP != null)
+            {this.topSubtitleTMP.alignment = TextAlignmentOptions.Center;}
+            if (this.subscriptionButtonTMP != null)
+            {this.subscriptionButtonTMP.alignment = TextAlignmentOptions.Center;}
+            if (this.bottomTitleTMP != null)
+            {this.bottomTitleTMP.alignment = TextAlignmentOptions.Center;}
+            if (this.bottomSubtitleTMP != null)
+            {this.bottomSubtitleTMP.alignment = TextAlignmentOptions.Center;}
+            if (this.termsLinkTMP != null)
+            {this.termsLinkTMP.alignment = TextAlignmentOptions.MidlineRight;}
+            if (this.restoreLinkTMP != null)
+            {this.restoreLinkTMP.alignment = TextAlignmentOptions.MidlineLeft;}
+            if (this.topTitleTMP != null)
+            {this.topTitleTMP.text = this.subscriptionConfiguration.topTitleText;}
+            if (this.topSubtitleTMP != null)
+            {this.topSubtitleTMP.text = this.subscriptionConfiguration.topSubtitleText;}
+            if (this.termsLinkTMP != null)
+            {this.termsLinkTMP.text = this.subscriptionConfiguration.topLeftLinkText;}
+            if (this.restoreLinkTMP != null)
+            {this.restoreLinkTMP.text = this.subscriptionConfiguration.topRightLinkText;}
+            if (this.bottomTitleTMP != null)
+            {this.bottomTitleTMP.text = this.subscriptionConfiguration.bottomTitleText;}
+            if (this.bottomSubtitleTMP != null)
+            {this.bottomSubtitleTMP.text = this.subscriptionConfiguration.bottomSubtitleText;}
+            if (this.subscriptionButtonTMP != null)
+            {this.subscriptionButtonTMP.text = this.subscriptionConfiguration.subscriptionButtonText;}
         }
 
         private void OnValidate()
