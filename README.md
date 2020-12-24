@@ -20,5 +20,6 @@ Refurbishing the Unity SDK as a UPM package
 - The package should now appear in your "In Project" packages and in your Project window under the Packages folder.
 
 ### In Game
+- In Project tab, go to "AppCentral\Panels".
 - Drag the desired panel prefab into a canvas.
-- Use it's ShowPanel() method to show it.
+- Use its ShowPanel() method to show it.
