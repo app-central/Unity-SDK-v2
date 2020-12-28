@@ -15,7 +15,7 @@ Refurbishing the Unity SDK as a UPM package
 ### AppCentral SDK
 - In the top Menu, "Window/Package Manager"
 - Click the + button and "Add Package from Git URL"
-- Enter this git URL: https://github.com/app-central/Unity-SDK-v2.git
+- Enter this git URL: https://github.com/app-central/sdk-unity.git
 - The package should now appear in your "In Project" packages and in your Project window under the Packages folder.
 
 ### In Game
