@@ -112,16 +112,9 @@ namespace AppCentral
             if (this.subscriptionButtonImage != null)
             { this.subscriptionButtonImage.sprite = this.subscriptionConfiguration.subscriptionButtonImage; }
 
-            if (this.topTitleTMP != null)
-            {this.topTitleTMP.alignment = TextAlignmentOptions.Center;}
-            if (this.topSubtitleTMP != null)
-            {this.topSubtitleTMP.alignment = TextAlignmentOptions.Center;}
-            if (this.subscriptionButtonTMP != null)
-            {this.subscriptionButtonTMP.alignment = TextAlignmentOptions.Center;}
-            if (this.bottomTitleTMP != null)
-            {this.bottomTitleTMP.alignment = TextAlignmentOptions.Center;}
-            if (this.bottomSubtitleTMP != null)
-            {this.bottomSubtitleTMP.alignment = TextAlignmentOptions.Center;}
+            foreach (TextMeshProUGUI tmp in new []{ this.topTitleTMP, this.topSubtitleTMP, this.subscriptionButtonTMP, this.bottomTitleTMP, this.bottomSubtitleTMP })
+            { if (tmp != null) { tmp.alignment = TextAlignmentOptions.Center; } }
+
             if (this.termsLinkTMP != null)
             {this.termsLinkTMP.alignment = TextAlignmentOptions.MidlineRight;}
             if (this.restoreLinkTMP != null)
