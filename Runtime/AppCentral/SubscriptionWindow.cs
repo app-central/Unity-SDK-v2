@@ -2,13 +2,10 @@
 namespace AppCentral
 {
     #region using
-    using System;
     using System.Linq;
-    using UnityEngine;
-    using Object = UnityEngine.Object;
-    using UnityEngine.UI;
     using TMPro;
-    using UnityEngine.Serialization;
+    using UnityEngine;
+    using UnityEngine.UI;
     #endregion
 
     /// <summary>This is the graphical interface, the view, of the shop.
@@ -70,46 +67,33 @@ namespace AppCentral
             SubscriptionWindow.Instance.gameObject.SetActive(false);
         }
 
+        /// <summary>Find a component in a child that corresponds to the given matches.</summary>
+        /// <param name="match1">The first string to match the name to.</param>
+        /// <param name="match2">The second string to match the name to.</param>
+        /// <typeparam name="T">The type of the component to search for.</typeparam>
+        /// <returns>The component if found, null otherwise.</returns>
+        private T GetComponent<T>(string match1, string match2 = null) where T : Component
+        {
+            return this.GetComponentsInChildren<T>().FirstOrDefault(
+                    t => t.gameObject.name.ToLower().Contains(match1)
+                         && (match2 == null || t.gameObject.name.ToLower().Contains(match2)));
+        }
+
         private void CheckAssignments()
         {
-            if (this.backgroundImage == null)
-            { this.backgroundImage = this.GetComponentsInChildren<Image>()
-                                         .FirstOrDefault(image => image.gameObject.name.ToLower().Contains("background")); }
-            if (this.foregroundImage == null)
-            { this.foregroundImage = this.GetComponentsInChildren<Image>()
-                                         .FirstOrDefault(image => image.gameObject.name.ToLower().Contains("foreground")); }
-            if (this.topTitleTMP == null)
-            { this.topTitleTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
-                                     .FirstOrDefault(tmp => tmp.gameObject.name.ToLower().Contains("top")
-                                                            && tmp.gameObject.name.ToLower().Contains("title")); }
-            if (this.topSubtitleTMP == null)
-            { this.topSubtitleTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
-                                        .FirstOrDefault(tmp => tmp.gameObject.name.ToLower().Contains("top")
-                                                               && tmp.gameObject.name.ToLower().Contains("subtitle")); }
-            if (this.termsLinkTMP == null)
-            { this.termsLinkTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
-                                        .FirstOrDefault(tmp => tmp.gameObject.name.ToLower().Contains("terms")
-                                                               && tmp.gameObject.name.ToLower().Contains("button")); }
-            if (this.restoreLinkTMP == null)
-            { this.restoreLinkTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
-                                         .FirstOrDefault(tmp => tmp.gameObject.name.ToLower().Contains("restore")
-                                                                && tmp.gameObject.name.ToLower().Contains("button")); }
-            if (this.bottomTitleTMP == null)
-            { this.bottomTitleTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
-                                          .FirstOrDefault(tmp => tmp.gameObject.name.ToLower().Contains("bottom")
-                                                                 && tmp.gameObject.name.ToLower().Contains("title")); }
-            if (this.bottomSubtitleTMP == null)
-            { this.bottomSubtitleTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
-                                           .FirstOrDefault(tmp => tmp.gameObject.name.ToLower().Contains("bottom")
-                                                                  && tmp.gameObject.name.ToLower().Contains("subtitle")); }
-            if (this.subscriptionButtonImage == null)
-            { this.subscriptionButtonImage = this.GetComponentsInChildren<Image>()
-                                                 .FirstOrDefault(image => image.gameObject.name.ToLower().Contains("subscription")
-                                                                          && image.gameObject.name.ToLower().Contains("button")); }
-            if (this.subscriptionButtonTMP == null)
-            { this.subscriptionButtonTMP = this.GetComponentsInChildren<TextMeshProUGUI>()
-                                               .FirstOrDefault(tmp => tmp.gameObject.name.ToLower().Contains("subscribe")
-                                                                      && tmp.gameObject.name.ToLower().Contains("tmp")); }
+            this.backgroundImage ??= this.GetComponent<Image>("background");
+            this.foregroundImage ??= this.GetComponent<Image>("foreground");
+
+            this.topTitleTMP ??= this.GetComponent<TextMeshProUGUI>("top", "title");
+            this.topSubtitleTMP ??= this.GetComponent<TextMeshProUGUI>("top", "subtitle");
+            this.termsLinkTMP ??= this.GetComponent<TextMeshProUGUI>("terms", "button");
+
+            this.restoreLinkTMP ??= this.GetComponent<TextMeshProUGUI>("restore", "button");
+            this.bottomTitleTMP ??= this.GetComponent<TextMeshProUGUI>("bottom", "title");
+            this.bottomSubtitleTMP ??= this.GetComponent<TextMeshProUGUI>("bottom", "subtitle");
+
+            this.subscriptionButtonImage ??= this.GetComponent<Image>("subscription", "button");
+            this.subscriptionButtonTMP ??= this.GetComponent<TextMeshProUGUI>("subscribe", "tmp");
         }
 
         /// <summary>Read configuration file into window parameters. Called by field context menu.</summary>
@@ -127,7 +111,7 @@ namespace AppCentral
             }
             if (this.subscriptionButtonImage != null)
             { this.subscriptionButtonImage.sprite = this.subscriptionConfiguration.subscriptionButtonImage; }
-            
+
             if (this.topTitleTMP != null)
             {this.topTitleTMP.alignment = TextAlignmentOptions.Center;}
             if (this.topSubtitleTMP != null)
