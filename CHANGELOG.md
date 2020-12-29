@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.1.5
+* Connected the missing connections on prefabs.
+
 ## 0.1.4
 * Rebuilt from the ground up. Same functionality, different setup.
 * Added must have support for TextMeshPro in assembly definition.
