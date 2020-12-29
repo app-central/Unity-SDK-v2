@@ -55,6 +55,8 @@ namespace AppCentral
                 return;
             }
 
+            SubscriptionWindow.Instance.ReadConfiguration();
+            
             SubscriptionWindow.Instance.gameObject.SetActive(true);
 
             SubscriptionWindow.WindowOpen = true;

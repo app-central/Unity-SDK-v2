@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.1.7
+* Read configuration on start.
+
 ## 0.1.6
 * Added self contained exit button sprite.
 
