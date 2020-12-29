@@ -889,9 +889,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 423851816455550035}
         m_TargetAssemblyTypeName: AppCentral.SubscriptionWindow, com.appcentral.unitysdk
-        m_MethodName: OpenAppCentralTerms
+        m_MethodName: RestorePurchases
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -994,8 +994,8 @@ MonoBehaviour:
   foregroundImage: {fileID: 1732473454519320097}
   topTitleTMP: {fileID: 1732473455117622710}
   topSubtitleTMP: {fileID: 1732473455110270755}
-  topLeftLinkTMP: {fileID: 1732473456114339034}
-  topRightLinkTMP: {fileID: 1732473456031682910}
+  termsLinkTMP: {fileID: 0}
+  restoreLinkTMP: {fileID: 0}
   bottomTitleTMP: {fileID: 1732473455531686363}
   bottomSubtitleTMP: {fileID: 1732473456072028384}
   subscriptionButtonImage: {fileID: 1732473456454241815}
@@ -1735,7 +1735,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1732473456228197700}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 423851816455550035}
+        m_TargetAssemblyTypeName: AppCentral.SubscriptionWindow, com.appcentral.unitysdk
+        m_MethodName: BuySubscription
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1732473456454241818
 GameObject:
   m_ObjectHideFlags: 0
@@ -1857,7 +1869,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 423851816455550035}
         m_TargetAssemblyTypeName: AppCentral.SubscriptionWindow, com.appcentral.unitysdk
         m_MethodName: OpenAppCentralTerms
         m_Mode: 1

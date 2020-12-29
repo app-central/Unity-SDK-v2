@@ -374,7 +374,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8671372745098907243}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6139935932047601554}
+        m_TargetAssemblyTypeName: AppCentral.SubscriptionWindow, com.appcentral.unitysdk
+        m_MethodName: OpenAppCentralTerms
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8671372745377416314
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,7 +507,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8671372745377416295}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6139935932047601554}
+        m_TargetAssemblyTypeName: AppCentral.SubscriptionWindow, com.appcentral.unitysdk
+        m_MethodName: BuySubscription
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8671372745407391788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,7 +1176,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8671372746077967488}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6139935932047601554}
+        m_TargetAssemblyTypeName: AppCentral.SubscriptionWindow, com.appcentral.unitysdk
+        m_MethodName: RestorePurchases
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8671372746379838729
 GameObject:
   m_ObjectHideFlags: 0
