@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.1.6
+* Added self contained exit button sprite.
+
 ## 0.1.5
 * Connected the missing connections on prefabs.
 
