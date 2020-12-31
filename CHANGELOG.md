@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.1.8
+* Added proper initialisation with Product ID.
+
 ## 0.1.7
 * Read configuration on start.
 
