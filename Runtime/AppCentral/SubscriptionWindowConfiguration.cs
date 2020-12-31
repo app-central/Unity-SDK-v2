@@ -6,6 +6,7 @@ namespace AppCentral
     [CreateAssetMenu(menuName = "ScriptableObjects/AppCentral/Subscription Window Configuration", order = 1)]
     public class SubscriptionWindowConfiguration : ScriptableObject
     {
+        public string productID;
         public string topTitleText;
         public string topSubtitleText;
         public string topLeftLinkText;

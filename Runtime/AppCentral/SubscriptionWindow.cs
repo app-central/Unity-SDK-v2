@@ -27,6 +27,8 @@ namespace AppCentral
         [SerializeField] private SubscriptionWindowConfiguration subscriptionConfiguration;
         #endregion // inspector fields
 
+        AppCentralStoreListener storeListener;
+        
         // It must be unique, always available and always accessible. It's the interface's presence in the game.
         public static SubscriptionWindow Instance { get; private set; }
         public static bool WindowOpen { get; private set; }
@@ -49,6 +51,13 @@ namespace AppCentral
 
         public static void ShowPanel()
         {
+            static void OpenWindow()
+            {
+                SubscriptionWindow.Instance.gameObject.SetActive(true);
+
+                SubscriptionWindow.WindowOpen = true;
+            }
+
             if (AppCentralStoreListener.IsUserSubscribed())
             {
                 Debug.Log("User already subscribed, not showing paywall");
@@ -56,10 +65,9 @@ namespace AppCentral
             }
 
             SubscriptionWindow.Instance.ReadConfiguration();
-            
-            SubscriptionWindow.Instance.gameObject.SetActive(true);
 
-            SubscriptionWindow.WindowOpen = true;
+            SubscriptionWindow.Instance.storeListener
+                = new AppCentralStoreListener(SubscriptionWindow.Instance.subscriptionConfiguration.productID, OpenWindow);
         }
 
         public static void HidePanel()
@@ -149,7 +157,6 @@ namespace AppCentral
                 Object.DestroyImmediate(this.gameObject);
                 return;
             }
-
             SubscriptionWindow.Instance = this;
         }
     }
