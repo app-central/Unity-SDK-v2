@@ -12,15 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca97c697554fa7bd02fc99c5624498, type: 3}
   m_Name: SubscriptionConfiguration1
   m_EditorClassIdentifier: 
-  topTitleText: Special Offer
-  topSubtitleText: Subscribe to Unlock All Content
-  topLeftLinkText: Terms and Conditions
-  topRightLinkText: Restore Purchases
-  bottomTitleText: Try 1 Month Free
-  bottomSubtitleText: Then $0.99/Month
+  productIDs:
+    subscriptionProductID: 
+  restoreLinkText: Restore Purchases
+  termsLinkText: Terms and Conditions
+  encouragementTitleText: Try 1 Month Free!
   subscriptionButtonText: Subscribe Now
   backgroundImage: {fileID: 21300000, guid: 1e2f96ba09a5c5144b8b796004f7e0f0, type: 3}
   foregroundImage: {fileID: 21300000, guid: 65fd26883529a5f4db44ea16cf925e82, type: 3}
-  foregroundOpacity: 0.5
   subscriptionButtonImage: {fileID: 21300000, guid: 81c448d84d41b244a91a738f53252f9b,
     type: 3}

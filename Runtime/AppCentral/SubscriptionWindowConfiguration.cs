@@ -13,16 +13,12 @@ namespace AppCentral
     public class SubscriptionWindowConfiguration : ScriptableObject
     {
         public ProductIDs productIDs;
-        public string topTitleText;
-        public string topSubtitleText;
-        public string topLeftLinkText;
-        public string topRightLinkText;
-        public string bottomTitleText;
-        public string bottomSubtitleText;
+        public string restoreLinkText;
+        public string termsLinkText;
+        public string encouragementTitleText;
         public string subscriptionButtonText;
         public Sprite backgroundImage;
         public Sprite foregroundImage;
-        public float foregroundOpacity = 1.0f;
         public Sprite subscriptionButtonImage;
     }
 }

@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 1732473455110270754}
   - component: {fileID: 1732473455110270755}
   m_Layer: 5
-  m_Name: Subscription Top Subtitle TMP
+  m_Name: Subscription Description TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -512,7 +512,7 @@ GameObject:
   - component: {fileID: 1732473455117622711}
   - component: {fileID: 1732473455117622710}
   m_Layer: 5
-  m_Name: Subscription Top Title TMP
+  m_Name: Subscription Title TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 1732473455531686362}
   - component: {fileID: 1732473455531686363}
   m_Layer: 5
-  m_Name: Subscription Bottom Title TMP
+  m_Name: Subscription Encouragement Title TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -781,7 +781,7 @@ GameObject:
   - component: {fileID: 1732473455641614807}
   - component: {fileID: 1732473455641614808}
   m_Layer: 5
-  m_Name: Subscription Top Right Button
+  m_Name: Subscription Restore Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -992,12 +992,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 1732473455790723792}
   foregroundImage: {fileID: 1732473454519320097}
-  topTitleTMP: {fileID: 1732473455117622710}
-  topSubtitleTMP: {fileID: 1732473455110270755}
-  termsLinkTMP: {fileID: 0}
-  restoreLinkTMP: {fileID: 0}
-  bottomTitleTMP: {fileID: 1732473455531686363}
-  bottomSubtitleTMP: {fileID: 1732473456072028384}
+  titleTMP: {fileID: 1732473455117622710}
+  descriptionTMP: {fileID: 1732473455110270755}
+  termsLinkTMP: {fileID: 1732473456114339034}
+  restoreLinkTMP: {fileID: 1732473456031682910}
+  encouragementTitleTMP: {fileID: 1732473455531686363}
+  priceTMP: {fileID: 1732473456072028384}
   subscriptionButtonImage: {fileID: 1732473456454241815}
   subscriptionButtonTMP: {fileID: 1732473456092487224}
   subscriptionConfiguration: {fileID: 11400000, guid: bdc541f0fc4e78c46ae2209b9cd96c39,
@@ -1091,7 +1091,7 @@ GameObject:
   - component: {fileID: 1732473456031682909}
   - component: {fileID: 1732473456031682910}
   m_Layer: 5
-  m_Name: Subscription Top Right Button TMP
+  m_Name: Subscription Restore Button TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1225,7 +1225,7 @@ GameObject:
   - component: {fileID: 1732473456072028415}
   - component: {fileID: 1732473456072028384}
   m_Layer: 5
-  m_Name: Subscription Bottom Subtitle TMP
+  m_Name: Subscription Price TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1493,7 +1493,7 @@ GameObject:
   - component: {fileID: 1732473456114339033}
   - component: {fileID: 1732473456114339034}
   m_Layer: 5
-  m_Name: Subscription Top Left Button TMP
+  m_Name: Subscription Terms Button TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1761,7 +1761,7 @@ GameObject:
   - component: {fileID: 1732473456454241815}
   - component: {fileID: 1732473456454241816}
   m_Layer: 5
-  m_Name: Subscription Top Left Button
+  m_Name: Subscription Terms Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

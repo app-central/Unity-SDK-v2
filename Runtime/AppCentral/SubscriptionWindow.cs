@@ -22,10 +22,10 @@ namespace AppCentral
         [FormerlySerializedAs("topSubtitleTMP"),SerializeField] private TextMeshProUGUI descriptionTMP;
         [SerializeField] private TextMeshProUGUI termsLinkTMP;
         [SerializeField] private TextMeshProUGUI restoreLinkTMP;
-        [SerializeField] private TextMeshProUGUI bottomTitleTMP;
+        [SerializeField] private TextMeshProUGUI encouragementTitleTMP;
         [SerializeField] private TextMeshProUGUI priceTMP;
-        [SerializeField] private Image subscriptionButtonImage;
-        [SerializeField] private TextMeshProUGUI subscriptionButtonTMP;
+        [SerializeField] private Image subscribeButtonImage;
+        [SerializeField] private TextMeshProUGUI subscribeButtonTMP;
         [ContextMenuItem("Run Configuration", "ReadConfiguration")]
         [SerializeField] private SubscriptionWindowConfiguration subscriptionConfiguration;
         #endregion // inspector fields
@@ -59,29 +59,23 @@ namespace AppCentral
             { this.backgroundImage.sprite = this.subscriptionConfiguration.backgroundImage; }
             if (this.foregroundImage != null)
             { this.foregroundImage.sprite = this.subscriptionConfiguration.foregroundImage; }
-            if (this.foregroundImage != null)
-            {
-                Color foregroundImageColor = this.foregroundImage.color;
-                foregroundImageColor.a = this.subscriptionConfiguration.foregroundOpacity;
-                this.foregroundImage.color = foregroundImageColor;
-            }
-            if (this.subscriptionButtonImage != null)
-            { this.subscriptionButtonImage.sprite = this.subscriptionConfiguration.subscriptionButtonImage; }
+            if (this.subscribeButtonImage != null)
+            { this.subscribeButtonImage.sprite = this.subscriptionConfiguration.subscriptionButtonImage; }
 
-            if (this.titleTMP != null)
-            {this.titleTMP.text = this.subscriptionConfiguration.topTitleText;}
-            if (this.descriptionTMP != null)
-            {this.descriptionTMP.text = this.subscriptionConfiguration.topSubtitleText;}
+            // if (this.titleTMP != null)
+            // {this.titleTMP.text = this.subscriptionConfiguration.topTitleText;}
+            // if (this.descriptionTMP != null)
+            // {this.descriptionTMP.text = this.subscriptionConfiguration.topSubtitleText;}
             if (this.termsLinkTMP != null)
-            {this.termsLinkTMP.text = this.subscriptionConfiguration.topLeftLinkText;}
+            {this.termsLinkTMP.text = this.subscriptionConfiguration.restoreLinkText;}
             if (this.restoreLinkTMP != null)
-            {this.restoreLinkTMP.text = this.subscriptionConfiguration.topRightLinkText;}
-            if (this.bottomTitleTMP != null)
-            {this.bottomTitleTMP.text = this.subscriptionConfiguration.bottomTitleText;}
-            if (this.priceTMP != null)
-            {this.priceTMP.text = this.subscriptionConfiguration.bottomSubtitleText;}
-            if (this.subscriptionButtonTMP != null)
-            {this.subscriptionButtonTMP.text = this.subscriptionConfiguration.subscriptionButtonText;}
+            {this.restoreLinkTMP.text = this.subscriptionConfiguration.termsLinkText;}
+            if (this.encouragementTitleTMP != null)
+            {this.encouragementTitleTMP.text = this.subscriptionConfiguration.encouragementTitleText;}
+            // if (this.priceTMP != null)
+            // {this.priceTMP.text = this.subscriptionConfiguration.bottomSubtitleText;}
+            if (this.subscribeButtonTMP != null)
+            {this.subscribeButtonTMP.text = this.subscriptionConfiguration.subscriptionButtonText;}
         }
 
         public static void ShowPanel()
@@ -105,8 +99,7 @@ namespace AppCentral
 
             SubscriptionWindow.Instance.ReadConfiguration();
 
-            // TODO: What is this for?
-            UnityWebRequest.Get("https://vnc412s287.execute-api.us-east-1.amazonaws.com/default/unity-tracker?v=1&action=start&appid=" + Application.identifier).SendWebRequest();
+			AnalyticsCommunicator.SendApplicationStartRequest();
 
             SubscriptionWindow.Instance.storeListener
                 = new AppCentralStoreListener(SubscriptionWindow.Instance.subscriptionConfiguration.productIDs, OpenWindow);
@@ -136,16 +129,16 @@ namespace AppCentral
             this.backgroundImage ??= this.GetComponent<Image>("background");
             this.foregroundImage ??= this.GetComponent<Image>("foreground");
 
-            this.titleTMP ??= this.GetComponent<TextMeshProUGUI>("top", "title");
-            this.descriptionTMP ??= this.GetComponent<TextMeshProUGUI>("top", "subtitle");
+            this.titleTMP ??= this.GetComponent<TextMeshProUGUI>("title");
+            this.descriptionTMP ??= this.GetComponent<TextMeshProUGUI>("description");
             this.termsLinkTMP ??= this.GetComponent<TextMeshProUGUI>("terms", "button");
 
             this.restoreLinkTMP ??= this.GetComponent<TextMeshProUGUI>("restore", "button");
-            this.bottomTitleTMP ??= this.GetComponent<TextMeshProUGUI>("bottom", "title");
-            this.priceTMP ??= this.GetComponent<TextMeshProUGUI>("bottom", "subtitle");
+            this.encouragementTitleTMP ??= this.GetComponent<TextMeshProUGUI>("encouragement");
+            this.priceTMP ??= this.GetComponent<TextMeshProUGUI>("price");
 
-            this.subscriptionButtonImage ??= this.GetComponent<Image>("subscription", "button");
-            this.subscriptionButtonTMP ??= this.GetComponent<TextMeshProUGUI>("subscribe", "tmp");
+            this.subscribeButtonImage ??= this.GetComponent<Image>("subscribe", "button");
+            this.subscribeButtonTMP ??= this.GetComponent<TextMeshProUGUI>("subscribe", "tmp");
         }
 
         private void OnValidate()

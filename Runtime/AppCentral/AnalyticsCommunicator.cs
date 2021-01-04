@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 
 namespace AppCentral
 {
-    public class BaseCommunicator
+    public class AnalyticsCommunicator
     {
         public static void SendApplicationStartRequest()
         {

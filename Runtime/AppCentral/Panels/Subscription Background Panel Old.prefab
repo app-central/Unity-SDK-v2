@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 8671372744995778954}
   - component: {fileID: 8671372744995778955}
   m_Layer: 5
-  m_Name: Top Title TMP
+  m_Name: Title TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 8671372745377416295}
   - component: {fileID: 8671372745377416312}
   m_Layer: 5
-  m_Name: Subscription Button
+  m_Name: Subscribe Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -544,7 +544,7 @@ GameObject:
   - component: {fileID: 8671372745407391785}
   - component: {fileID: 8671372745407391786}
   m_Layer: 5
-  m_Name: Top Subtitle TMP
+  m_Name: Description TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -946,7 +946,7 @@ GameObject:
   - component: {fileID: 8671372745788015466}
   - component: {fileID: 8671372745788015467}
   m_Layer: 5
-  m_Name: Subscription Button TMP
+  m_Name: Subscribe Button TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1298,14 +1298,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 8671372746379838839}
   foregroundImage: {fileID: 0}
-  topTitleTMP: {fileID: 8671372744995778955}
-  topSubtitleTMP: {fileID: 8671372745407391786}
+  titleTMP: {fileID: 8671372744995778955}
+  descriptionTMP: {fileID: 8671372745407391786}
   termsLinkTMP: {fileID: 8671372745507140637}
   restoreLinkTMP: {fileID: 8671372745571756836}
-  bottomTitleTMP: {fileID: 8671372746594935847}
-  bottomSubtitleTMP: {fileID: 8671372746594935847}
-  subscriptionButtonImage: {fileID: 8671372745377416295}
-  subscriptionButtonTMP: {fileID: 8671372745788015467}
+  encouragementTitleTMP: {fileID: 0}
+  priceTMP: {fileID: 8671372746594935847}
+  subscribeButtonImage: {fileID: 8671372745377416295}
+  subscribeButtonTMP: {fileID: 8671372745788015467}
   subscriptionConfiguration: {fileID: 11400000, guid: bdc541f0fc4e78c46ae2209b9cd96c39,
     type: 2}
 --- !u!1 &8671372746594935865
@@ -1320,7 +1320,7 @@ GameObject:
   - component: {fileID: 8671372746594935846}
   - component: {fileID: 8671372746594935847}
   m_Layer: 5
-  m_Name: Bottom Subtitle TMP
+  m_Name: Price TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
