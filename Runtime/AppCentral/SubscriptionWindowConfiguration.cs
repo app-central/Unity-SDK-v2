@@ -1,12 +1,18 @@
 namespace AppCentral
 {
+    using System;
     using UnityEngine;
-    using UnityEngine.UI;
+
+    [Serializable]
+    public struct ProductIDs
+    {
+        public string subscriptionProductID;
+    }
 
     [CreateAssetMenu(menuName = "ScriptableObjects/AppCentral/Subscription Window Configuration", order = 1)]
     public class SubscriptionWindowConfiguration : ScriptableObject
     {
-        public string productID;
+        public ProductIDs productIDs;
         public string topTitleText;
         public string topSubtitleText;
         public string topLeftLinkText;

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.1.9
+* Fixed initialisation to get strings from product.
+
 ## 0.1.8
 * Added proper initialisation with Product ID.
 

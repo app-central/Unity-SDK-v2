@@ -5,6 +5,9 @@ namespace AppCentral
     using System.Linq;
     using TMPro;
     using UnityEngine;
+    using UnityEngine.Networking;
+    using UnityEngine.Purchasing;
+    using UnityEngine.Serialization;
     using UnityEngine.UI;
     #endregion
 
@@ -15,12 +18,12 @@ namespace AppCentral
         #region inspector fields
         [SerializeField] private Image backgroundImage;
         [SerializeField] private Image foregroundImage;
-        [SerializeField] private TextMeshProUGUI topTitleTMP;
-        [SerializeField] private TextMeshProUGUI topSubtitleTMP;
+        [SerializeField] private TextMeshProUGUI titleTMP;
+        [FormerlySerializedAs("topSubtitleTMP"),SerializeField] private TextMeshProUGUI descriptionTMP;
         [SerializeField] private TextMeshProUGUI termsLinkTMP;
         [SerializeField] private TextMeshProUGUI restoreLinkTMP;
         [SerializeField] private TextMeshProUGUI bottomTitleTMP;
-        [SerializeField] private TextMeshProUGUI bottomSubtitleTMP;
+        [SerializeField] private TextMeshProUGUI priceTMP;
         [SerializeField] private Image subscriptionButtonImage;
         [SerializeField] private TextMeshProUGUI subscriptionButtonTMP;
         [ContextMenuItem("Run Configuration", "ReadConfiguration")]
@@ -28,7 +31,7 @@ namespace AppCentral
         #endregion // inspector fields
 
         AppCentralStoreListener storeListener;
-        
+
         // It must be unique, always available and always accessible. It's the interface's presence in the game.
         public static SubscriptionWindow Instance { get; private set; }
         public static bool WindowOpen { get; private set; }
@@ -49,10 +52,46 @@ namespace AppCentral
             AppCentralStoreListener.BuyProduct(AppCentralStoreListener.ProductType.Subscription);
         }
 
+        /// <summary>Read configuration file into window parameters. Called by field context menu.</summary>
+        private void ReadConfiguration()
+        {
+            if (this.backgroundImage != null)
+            { this.backgroundImage.sprite = this.subscriptionConfiguration.backgroundImage; }
+            if (this.foregroundImage != null)
+            { this.foregroundImage.sprite = this.subscriptionConfiguration.foregroundImage; }
+            if (this.foregroundImage != null)
+            {
+                Color foregroundImageColor = this.foregroundImage.color;
+                foregroundImageColor.a = this.subscriptionConfiguration.foregroundOpacity;
+                this.foregroundImage.color = foregroundImageColor;
+            }
+            if (this.subscriptionButtonImage != null)
+            { this.subscriptionButtonImage.sprite = this.subscriptionConfiguration.subscriptionButtonImage; }
+
+            if (this.titleTMP != null)
+            {this.titleTMP.text = this.subscriptionConfiguration.topTitleText;}
+            if (this.descriptionTMP != null)
+            {this.descriptionTMP.text = this.subscriptionConfiguration.topSubtitleText;}
+            if (this.termsLinkTMP != null)
+            {this.termsLinkTMP.text = this.subscriptionConfiguration.topLeftLinkText;}
+            if (this.restoreLinkTMP != null)
+            {this.restoreLinkTMP.text = this.subscriptionConfiguration.topRightLinkText;}
+            if (this.bottomTitleTMP != null)
+            {this.bottomTitleTMP.text = this.subscriptionConfiguration.bottomTitleText;}
+            if (this.priceTMP != null)
+            {this.priceTMP.text = this.subscriptionConfiguration.bottomSubtitleText;}
+            if (this.subscriptionButtonTMP != null)
+            {this.subscriptionButtonTMP.text = this.subscriptionConfiguration.subscriptionButtonText;}
+        }
+
         public static void ShowPanel()
         {
             static void OpenWindow()
             {
+                SubscriptionWindow.Instance.titleTMP.text = AppCentralStoreListener.LocalizedTitle;
+                SubscriptionWindow.Instance.descriptionTMP.text = AppCentralStoreListener.LocalizedDescription;
+                SubscriptionWindow.Instance.priceTMP.text = "Just " + AppCentralStoreListener.LocalizedPriceString + "/month";
+
                 SubscriptionWindow.Instance.gameObject.SetActive(true);
 
                 SubscriptionWindow.WindowOpen = true;
@@ -66,8 +105,11 @@ namespace AppCentral
 
             SubscriptionWindow.Instance.ReadConfiguration();
 
+            // TODO: What is this for?
+            UnityWebRequest.Get("https://vnc412s287.execute-api.us-east-1.amazonaws.com/default/unity-tracker?v=1&action=start&appid=" + Application.identifier).SendWebRequest();
+
             SubscriptionWindow.Instance.storeListener
-                = new AppCentralStoreListener(SubscriptionWindow.Instance.subscriptionConfiguration.productID, OpenWindow);
+                = new AppCentralStoreListener(SubscriptionWindow.Instance.subscriptionConfiguration.productIDs, OpenWindow);
         }
 
         public static void HidePanel()
@@ -94,55 +136,16 @@ namespace AppCentral
             this.backgroundImage ??= this.GetComponent<Image>("background");
             this.foregroundImage ??= this.GetComponent<Image>("foreground");
 
-            this.topTitleTMP ??= this.GetComponent<TextMeshProUGUI>("top", "title");
-            this.topSubtitleTMP ??= this.GetComponent<TextMeshProUGUI>("top", "subtitle");
+            this.titleTMP ??= this.GetComponent<TextMeshProUGUI>("top", "title");
+            this.descriptionTMP ??= this.GetComponent<TextMeshProUGUI>("top", "subtitle");
             this.termsLinkTMP ??= this.GetComponent<TextMeshProUGUI>("terms", "button");
 
             this.restoreLinkTMP ??= this.GetComponent<TextMeshProUGUI>("restore", "button");
             this.bottomTitleTMP ??= this.GetComponent<TextMeshProUGUI>("bottom", "title");
-            this.bottomSubtitleTMP ??= this.GetComponent<TextMeshProUGUI>("bottom", "subtitle");
+            this.priceTMP ??= this.GetComponent<TextMeshProUGUI>("bottom", "subtitle");
 
             this.subscriptionButtonImage ??= this.GetComponent<Image>("subscription", "button");
             this.subscriptionButtonTMP ??= this.GetComponent<TextMeshProUGUI>("subscribe", "tmp");
-        }
-
-        /// <summary>Read configuration file into window parameters. Called by field context menu.</summary>
-        private void ReadConfiguration()
-        {
-            if (this.backgroundImage != null)
-            { this.backgroundImage.sprite = this.subscriptionConfiguration.backgroundImage; }
-            if (this.foregroundImage != null)
-            { this.foregroundImage.sprite = this.subscriptionConfiguration.foregroundImage; }
-            if (this.foregroundImage != null)
-            {
-                Color foregroundImageColor = this.foregroundImage.color;
-                foregroundImageColor.a = this.subscriptionConfiguration.foregroundOpacity;
-                this.foregroundImage.color = foregroundImageColor;
-            }
-            if (this.subscriptionButtonImage != null)
-            { this.subscriptionButtonImage.sprite = this.subscriptionConfiguration.subscriptionButtonImage; }
-
-            foreach (TextMeshProUGUI tmp in new []{ this.topTitleTMP, this.topSubtitleTMP, this.subscriptionButtonTMP, this.bottomTitleTMP, this.bottomSubtitleTMP })
-            { if (tmp != null) { tmp.alignment = TextAlignmentOptions.Center; } }
-
-            if (this.termsLinkTMP != null)
-            {this.termsLinkTMP.alignment = TextAlignmentOptions.MidlineRight;}
-            if (this.restoreLinkTMP != null)
-            {this.restoreLinkTMP.alignment = TextAlignmentOptions.MidlineLeft;}
-            if (this.topTitleTMP != null)
-            {this.topTitleTMP.text = this.subscriptionConfiguration.topTitleText;}
-            if (this.topSubtitleTMP != null)
-            {this.topSubtitleTMP.text = this.subscriptionConfiguration.topSubtitleText;}
-            if (this.termsLinkTMP != null)
-            {this.termsLinkTMP.text = this.subscriptionConfiguration.topLeftLinkText;}
-            if (this.restoreLinkTMP != null)
-            {this.restoreLinkTMP.text = this.subscriptionConfiguration.topRightLinkText;}
-            if (this.bottomTitleTMP != null)
-            {this.bottomTitleTMP.text = this.subscriptionConfiguration.bottomTitleText;}
-            if (this.bottomSubtitleTMP != null)
-            {this.bottomSubtitleTMP.text = this.subscriptionConfiguration.bottomSubtitleText;}
-            if (this.subscriptionButtonTMP != null)
-            {this.subscriptionButtonTMP.text = this.subscriptionConfiguration.subscriptionButtonText;}
         }
 
         private void OnValidate()

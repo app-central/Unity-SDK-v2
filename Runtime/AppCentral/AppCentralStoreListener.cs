@@ -56,7 +56,6 @@ namespace AppCentral
 
         /// <summary>Check if the listener has been initialised.</summary>
         /// <returns>Return true if it has, false otherwise.</returns>
-
         public static bool IsInitialized() => AppCentralStoreListener.storeController != null
                                               && AppCentralStoreListener.storeExtensionProvider != null;
 
@@ -221,17 +220,17 @@ namespace AppCentral
         #endregion // IStoreListener implementation
 
         /// <summary>Entry point: How the whole system starts.</summary>
-        /// <param name="productSubscriptionID">The id for the specific subscription used by this user in this application.</param>
-        /// <param name="OnInitialisedAction">The action to call when this is initialised.</param>
-        public AppCentralStoreListener(string productSubscriptionID, OnInitialisedDelegate OnInitialisedAction)
+        /// <param name="productIDs">Product IDs for what can be bought in the game.</param>
+        /// <param name="onInitialisedAction">The action to call when this is initialised.</param>
+        public AppCentralStoreListener(ProductIDs productIDs, OnInitialisedDelegate onInitialisedAction)
         {
             if (AppCentralStoreListener.IsInitialized())
             { return; }
 
-            Debug.Log("Init product " + productSubscriptionID);
-            AppCentralStoreListener.productNameAppleSubscription = productSubscriptionID;
-            AppCentralStoreListener.productIDSubscription = productSubscriptionID;
-            this.OnInitialisedEvent += OnInitialisedAction;
+            Debug.Log("Init Subscription " + productIDs.subscriptionProductID);
+            AppCentralStoreListener.productNameAppleSubscription = productIDs.subscriptionProductID;
+            AppCentralStoreListener.productIDSubscription = productIDs.subscriptionProductID;
+            this.OnInitialisedEvent += onInitialisedAction;
 
             // Create a builder, first passing in a suite of Unity provided stores.
             ConfigurationBuilder purchasingConfiguration = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
