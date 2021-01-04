@@ -67,9 +67,9 @@ namespace AppCentral
             // if (this.descriptionTMP != null)
             // {this.descriptionTMP.text = this.subscriptionConfiguration.topSubtitleText;}
             if (this.termsLinkTMP != null)
-            {this.termsLinkTMP.text = this.subscriptionConfiguration.restoreLinkText;}
+            {this.termsLinkTMP.text = this.subscriptionConfiguration.termsLinkText;}
             if (this.restoreLinkTMP != null)
-            {this.restoreLinkTMP.text = this.subscriptionConfiguration.termsLinkText;}
+            {this.restoreLinkTMP.text = this.subscriptionConfiguration.restoreLinkText;}
             if (this.encouragementTitleTMP != null)
             {this.encouragementTitleTMP.text = this.subscriptionConfiguration.encouragementTitleText;}
             // if (this.priceTMP != null)
