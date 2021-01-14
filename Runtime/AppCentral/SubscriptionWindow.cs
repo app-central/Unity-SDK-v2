@@ -55,12 +55,12 @@ namespace AppCentral
         /// <summary>Read configuration file into window parameters. Called by field context menu.</summary>
         private void ReadConfiguration()
         {
-            if (this.backgroundImage != null)
-            { this.backgroundImage.sprite = this.subscriptionConfiguration.backgroundImage; }
-            if (this.foregroundImage != null)
-            { this.foregroundImage.sprite = this.subscriptionConfiguration.foregroundImage; }
-            if (this.subscribeButtonImage != null)
-            { this.subscribeButtonImage.sprite = this.subscriptionConfiguration.subscriptionButtonImage; }
+            // if (this.backgroundImage != null)
+            // { this.backgroundImage.sprite = this.subscriptionConfiguration.backgroundImage; }
+            // if (this.foregroundImage != null)
+            // { this.foregroundImage.sprite = this.subscriptionConfiguration.foregroundImage; }
+            // if (this.subscribeButtonImage != null)
+            // { this.subscribeButtonImage.sprite = this.subscriptionConfiguration.subscriptionButtonImage; }
 
             // if (this.titleTMP != null)
             // {this.titleTMP.text = this.subscriptionConfiguration.topTitleText;}
@@ -78,17 +78,17 @@ namespace AppCentral
             {this.subscribeButtonTMP.text = this.subscriptionConfiguration.subscriptionButtonText;}
         }
 
-        public static void ShowPanel()
+        public void ShowPanel()
         {
-            static void OpenWindow()
+            void OpenWindow()
             {
-                SubscriptionWindow.Instance.titleTMP.text = AppCentralStoreListener.LocalizedTitle;
-                SubscriptionWindow.Instance.descriptionTMP.text = AppCentralStoreListener.LocalizedDescription;
-                SubscriptionWindow.Instance.priceTMP.text = "Just " + AppCentralStoreListener.LocalizedPriceString + "/month";
+                this.titleTMP.text = AppCentralStoreListener.LocalizedTitle;
+                this.descriptionTMP.text = AppCentralStoreListener.LocalizedDescription;
+                this.priceTMP.text = "Just " + AppCentralStoreListener.LocalizedPriceString + "per month";
 
-                SubscriptionWindow.Instance.gameObject.SetActive(true);
+                this.gameObject.SetActive(true);
 
-                SubscriptionWindow.WindowOpen = true;
+                // SubscriptionWindow.WindowOpen = true;
             }
 
             if (AppCentralStoreListener.IsUserSubscribed())
@@ -97,17 +97,16 @@ namespace AppCentral
                 return;
             }
 
-            SubscriptionWindow.Instance.ReadConfiguration();
+            this.ReadConfiguration();
 
 			AnalyticsCommunicator.SendApplicationStartRequest();
 
-            SubscriptionWindow.Instance.storeListener
-                = new AppCentralStoreListener(SubscriptionWindow.Instance.subscriptionConfiguration.productIDs, OpenWindow);
+            this.storeListener = new AppCentralStoreListener(this.subscriptionConfiguration.productIDs, OpenWindow);
         }
 
         public static void HidePanel()
         {
-            SubscriptionWindow.WindowOpen = false;
+            // SubscriptionWindow.WindowOpen = false;
 
             SubscriptionWindow.Instance.gameObject.SetActive(false);
         }
