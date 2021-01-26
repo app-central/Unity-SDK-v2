@@ -27,7 +27,7 @@ namespace AppCentral
         [SerializeField] private Image subscribeButtonImage;
         [SerializeField] private TextMeshProUGUI subscribeButtonTMP;
         [ContextMenuItem("Run Configuration", "ReadConfiguration")]
-        [SerializeField] private SubscriptionWindowConfiguration subscriptionConfiguration;
+        [SerializeField] private ProductIDs productIDs;
         #endregion // inspector fields
 
         AppCentralStoreListener storeListener;
@@ -52,32 +52,6 @@ namespace AppCentral
             AppCentralStoreListener.BuyProduct(AppCentralStoreListener.ProductType.Subscription);
         }
 
-        /// <summary>Read configuration file into window parameters. Called by field context menu.</summary>
-        private void ReadConfiguration()
-        {
-            // if (this.backgroundImage != null)
-            // { this.backgroundImage.sprite = this.subscriptionConfiguration.backgroundImage; }
-            // if (this.foregroundImage != null)
-            // { this.foregroundImage.sprite = this.subscriptionConfiguration.foregroundImage; }
-            // if (this.subscribeButtonImage != null)
-            // { this.subscribeButtonImage.sprite = this.subscriptionConfiguration.subscriptionButtonImage; }
-
-            // if (this.titleTMP != null)
-            // {this.titleTMP.text = this.subscriptionConfiguration.topTitleText;}
-            // if (this.descriptionTMP != null)
-            // {this.descriptionTMP.text = this.subscriptionConfiguration.topSubtitleText;}
-            if (this.termsLinkTMP != null)
-            {this.termsLinkTMP.text = this.subscriptionConfiguration.termsLinkText;}
-            if (this.restoreLinkTMP != null)
-            {this.restoreLinkTMP.text = this.subscriptionConfiguration.restoreLinkText;}
-            if (this.encouragementTitleTMP != null)
-            {this.encouragementTitleTMP.text = this.subscriptionConfiguration.encouragementTitleText;}
-            // if (this.priceTMP != null)
-            // {this.priceTMP.text = this.subscriptionConfiguration.bottomSubtitleText;}
-            if (this.subscribeButtonTMP != null)
-            {this.subscribeButtonTMP.text = this.subscriptionConfiguration.subscriptionButtonText;}
-        }
-
         public void ShowPanel()
         {
             void OpenWindow()
@@ -97,11 +71,9 @@ namespace AppCentral
                 return;
             }
 
-            this.ReadConfiguration();
-
 			AnalyticsCommunicator.SendApplicationStartRequest();
 
-            this.storeListener = new AppCentralStoreListener(this.subscriptionConfiguration.productIDs, OpenWindow);
+            this.storeListener = new AppCentralStoreListener(this.productIDs, OpenWindow);
         }
 
         public static void HidePanel()
