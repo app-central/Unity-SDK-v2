@@ -1,7 +1,7 @@
 {
   "name": "com.app-central.unitysdk",
   "displayName": "App-Central Unity SDK",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "unity": "2018.3",
   "keywords": [
     "sdk",
@@ -10,7 +10,7 @@
   "type": "tool",
   "description": "AppCentral Unity SDK",
   "dependencies": {
-    "com.unity.purchasing": "2.2.1",
+    "com.unity.purchasing": "2.2.2",
     "com.unity.textmeshpro": "3.0.3"
   }
 }

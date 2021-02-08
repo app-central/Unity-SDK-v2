@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.2.0
+Included AppLovin MAX and Game Analytics SDKs. 
+
 ## 0.1.9
 * Fixed initialisation to get strings from product.
 
