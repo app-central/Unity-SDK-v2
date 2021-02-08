@@ -63,3 +63,4 @@ crashlytics-build.properties
 /obj.meta
 /Unity-SDK-v2.csproj.meta
 /Unity-SDK-v2.sln.meta
+.DS_Store
