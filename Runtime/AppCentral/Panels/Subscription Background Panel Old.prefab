@@ -1296,6 +1296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce329bb8ae824dc29cfe630463e55a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  subscriptionPrefab: {fileID: 8671372746379838729}
   backgroundImage: {fileID: 8671372746379838839}
   foregroundImage: {fileID: 0}
   titleTMP: {fileID: 8671372744995778955}
@@ -1306,8 +1307,6 @@ MonoBehaviour:
   priceTMP: {fileID: 8671372746594935847}
   subscribeButtonImage: {fileID: 8671372745377416295}
   subscribeButtonTMP: {fileID: 8671372745788015467}
-  subscriptionConfiguration: {fileID: 11400000, guid: bdc541f0fc4e78c46ae2209b9cd96c39,
-    type: 2}
 --- !u!1 &8671372746594935865
 GameObject:
   m_ObjectHideFlags: 0

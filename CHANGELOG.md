@@ -1,7 +1,11 @@
 # CHANGELOG
 
+## 0.2.1
+* Removed Subscription Window configuration.
+* Modified Subscription Window to have instantiation and initialisation.
+
 ## 0.2.0
-Included AppLovin MAX and Game Analytics SDKs. 
+* Included AppLovin MAX and Game Analytics SDKs. 
 
 ## 0.1.9
 * Fixed initialisation to get strings from product.

@@ -990,6 +990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce329bb8ae824dc29cfe630463e55a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  subscriptionPrefab: {fileID: 1732473455790723795}
   backgroundImage: {fileID: 1732473455790723792}
   foregroundImage: {fileID: 1732473454519320097}
   titleTMP: {fileID: 1732473455117622710}
@@ -998,10 +999,8 @@ MonoBehaviour:
   restoreLinkTMP: {fileID: 1732473456031682910}
   encouragementTitleTMP: {fileID: 1732473455531686363}
   priceTMP: {fileID: 1732473456072028384}
-  subscriptionButtonImage: {fileID: 1732473456454241815}
-  subscriptionButtonTMP: {fileID: 1732473456092487224}
-  subscriptionConfiguration: {fileID: 11400000, guid: bdc541f0fc4e78c46ae2209b9cd96c39,
-    type: 2}
+  subscribeButtonImage: {fileID: 1732473456228197700}
+  subscribeButtonTMP: {fileID: 1732473456092487224}
 --- !u!1 &1732473455839948307
 GameObject:
   m_ObjectHideFlags: 0

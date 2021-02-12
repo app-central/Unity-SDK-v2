@@ -2,6 +2,7 @@
 namespace AppCentral
 {
     #region using
+    using System;
     using System.Linq;
     using TMPro;
     using UnityEngine;
@@ -9,7 +10,13 @@ namespace AppCentral
     using UnityEngine.Purchasing;
     using UnityEngine.Serialization;
     using UnityEngine.UI;
+    using Object = UnityEngine.Object;
     #endregion
+
+    [Serializable] public struct ProductIDs
+    {
+        public string subscriptionProductID;
+    }
 
     /// <summary>This is the graphical interface, the view, of the shop.
     /// It should pull a developer uploaded assets to display a custom made shop interface for the user.</summary>
@@ -19,22 +26,19 @@ namespace AppCentral
         [SerializeField] private Image backgroundImage;
         [SerializeField] private Image foregroundImage;
         [SerializeField] private TextMeshProUGUI titleTMP;
-        [FormerlySerializedAs("topSubtitleTMP"),SerializeField] private TextMeshProUGUI descriptionTMP;
+        [SerializeField] private TextMeshProUGUI descriptionTMP;
         [SerializeField] private TextMeshProUGUI termsLinkTMP;
         [SerializeField] private TextMeshProUGUI restoreLinkTMP;
         [SerializeField] private TextMeshProUGUI encouragementTitleTMP;
         [SerializeField] private TextMeshProUGUI priceTMP;
         [SerializeField] private Image subscribeButtonImage;
         [SerializeField] private TextMeshProUGUI subscribeButtonTMP;
-        [ContextMenuItem("Run Configuration", "ReadConfiguration")]
-        [SerializeField] private SubscriptionWindowConfiguration subscriptionConfiguration;
         #endregion // inspector fields
 
-        AppCentralStoreListener storeListener;
+        private AppCentralStoreListener storeListener;
 
         // It must be unique, always available and always accessible. It's the interface's presence in the game.
         public static SubscriptionWindow Instance { get; private set; }
-        public static bool WindowOpen { get; private set; }
 
         public void OpenAppCentralTerms()
         {
@@ -52,43 +56,15 @@ namespace AppCentral
             AppCentralStoreListener.BuyProduct(AppCentralStoreListener.ProductType.Subscription);
         }
 
-        /// <summary>Read configuration file into window parameters. Called by field context menu.</summary>
-        private void ReadConfiguration()
+        public void Initialise(ProductIDs productIDs)
         {
-            // if (this.backgroundImage != null)
-            // { this.backgroundImage.sprite = this.subscriptionConfiguration.backgroundImage; }
-            // if (this.foregroundImage != null)
-            // { this.foregroundImage.sprite = this.subscriptionConfiguration.foregroundImage; }
-            // if (this.subscribeButtonImage != null)
-            // { this.subscribeButtonImage.sprite = this.subscriptionConfiguration.subscriptionButtonImage; }
-
-            // if (this.titleTMP != null)
-            // {this.titleTMP.text = this.subscriptionConfiguration.topTitleText;}
-            // if (this.descriptionTMP != null)
-            // {this.descriptionTMP.text = this.subscriptionConfiguration.topSubtitleText;}
-            if (this.termsLinkTMP != null)
-            {this.termsLinkTMP.text = this.subscriptionConfiguration.termsLinkText;}
-            if (this.restoreLinkTMP != null)
-            {this.restoreLinkTMP.text = this.subscriptionConfiguration.restoreLinkText;}
-            if (this.encouragementTitleTMP != null)
-            {this.encouragementTitleTMP.text = this.subscriptionConfiguration.encouragementTitleText;}
-            // if (this.priceTMP != null)
-            // {this.priceTMP.text = this.subscriptionConfiguration.bottomSubtitleText;}
-            if (this.subscribeButtonTMP != null)
-            {this.subscribeButtonTMP.text = this.subscriptionConfiguration.subscriptionButtonText;}
-        }
-
-        public void ShowPanel()
-        {
-            void OpenWindow()
+            static void OpenWindow()
             {
-                this.titleTMP.text = AppCentralStoreListener.LocalizedTitle;
-                this.descriptionTMP.text = AppCentralStoreListener.LocalizedDescription;
-                this.priceTMP.text = "Just " + AppCentralStoreListener.LocalizedPriceString + "per month";
+                SubscriptionWindow.Instance.titleTMP.text = AppCentralStoreListener.LocalizedTitle;
+                SubscriptionWindow.Instance.descriptionTMP.text = AppCentralStoreListener.LocalizedDescription;
+                SubscriptionWindow.Instance.priceTMP.text = "Just " + AppCentralStoreListener.LocalizedPriceString + " per month";
 
-                this.gameObject.SetActive(true);
-
-                // SubscriptionWindow.WindowOpen = true;
+                SubscriptionWindow.Instance.gameObject.SetActive(true);
             }
 
             if (AppCentralStoreListener.IsUserSubscribed())
@@ -97,17 +73,13 @@ namespace AppCentral
                 return;
             }
 
-            this.ReadConfiguration();
-
 			AnalyticsCommunicator.SendApplicationStartRequest();
 
-            this.storeListener = new AppCentralStoreListener(this.subscriptionConfiguration.productIDs, OpenWindow);
+            SubscriptionWindow.Instance.storeListener = new AppCentralStoreListener(productIDs, OpenWindow);
         }
 
         public static void HidePanel()
         {
-            // SubscriptionWindow.WindowOpen = false;
-
             SubscriptionWindow.Instance.gameObject.SetActive(false);
         }
 
