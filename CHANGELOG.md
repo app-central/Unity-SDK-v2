@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.2.2
+* Allows initialising with all graphical assets.
+
 ## 0.2.1
 * Removed Subscription Window configuration.
 * Modified Subscription Window to have instantiation and initialisation.

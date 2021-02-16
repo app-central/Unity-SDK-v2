@@ -56,13 +56,27 @@ namespace AppCentral
             AppCentralStoreListener.BuyProduct(AppCentralStoreListener.ProductType.Subscription);
         }
 
-        public void Initialise(ProductIDs productIDs)
+        /// <summary>Initialises the Subscription Window with all required parameters.</summary>
+        /// <param name="productIDs">The list of product IDs available for this application.</param>
+        /// <param name="backgroundSprite">The sprite to set for the background image. It must be a 16:9 image.</param>
+        /// <param name="foregroundSprite">The sprite to set for the foreground image. It must be a 16:9 image with transparency (Or it will hide the background.)</param>
+        /// <param name="termsLinkText">The text to put on the Terms & Conditions link.</param>
+        /// <param name="restoreLinkText">The text to put on the Restore Purchases link.</param>
+        /// <param name="encouragementText">The text to use to encourage the user to subscribe.</param>
+        /// <param name="priceTextFormat">The format string to use for the price. Must contain %s where the actual price string will be placed.</param>
+        /// <param name="subscribeButtonSprite">The sprite to set for the subscription button image.</param>
+        /// <param name="subscribeButtonText">The text to use for the subscription button text.</param>\
+        /// <remarks>The window title, description and actual price is derived from the product IDs.</remarks>
+        public void Initialise(ProductIDs productIDs, Sprite backgroundSprite = null, Sprite foregroundSprite = null,
+                               string termsLinkText = "Terms & Conditions", string restoreLinkText = "Restore Purchases",
+                               string encouragementText = "Buy Now!", string priceTextFormat = "Only %s/month",
+                               Sprite subscribeButtonSprite = null, string subscribeButtonText = "Subscribe Now")
         {
-            static void OpenWindow()
+            void OpenWindow()
             {
                 SubscriptionWindow.Instance.titleTMP.text = AppCentralStoreListener.LocalizedTitle;
                 SubscriptionWindow.Instance.descriptionTMP.text = AppCentralStoreListener.LocalizedDescription;
-                SubscriptionWindow.Instance.priceTMP.text = "Just " + AppCentralStoreListener.LocalizedPriceString + " per month";
+                SubscriptionWindow.Instance.priceTMP.text = string.Format(priceTextFormat, AppCentralStoreListener.LocalizedPriceString);
 
                 SubscriptionWindow.Instance.gameObject.SetActive(true);
             }
@@ -74,6 +88,18 @@ namespace AppCentral
             }
 
 			AnalyticsCommunicator.SendApplicationStartRequest();
+
+            Color transparent = new Color(1f, 1f, 1f, 0f);
+			this.backgroundImage.sprite = backgroundSprite;
+            if (backgroundSprite == null) { this.backgroundImage.color = transparent;}
+            this.foregroundImage.sprite = foregroundSprite;
+            if (foregroundSprite == null) { this.foregroundImage.color = transparent; }
+            this.termsLinkTMP.text = termsLinkText;
+            this.restoreLinkTMP.text = restoreLinkText;
+            this.encouragementTitleTMP.text = encouragementText;
+            this.subscribeButtonImage.sprite = subscribeButtonSprite;
+            if (subscribeButtonSprite == null) { this.subscribeButtonImage.color = transparent; }
+            this.subscribeButtonTMP.text = subscribeButtonText;
 
             SubscriptionWindow.Instance.storeListener = new AppCentralStoreListener(productIDs, OpenWindow);
         }
